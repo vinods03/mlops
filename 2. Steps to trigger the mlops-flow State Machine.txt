@@ -13,13 +13,13 @@ The SQS queue must have below access policy so as to be able to accept event not
         "Service": "s3.amazonaws.com"
       },
       "Action": "SQS:SendMessage",
-      "Resource": "arn:aws:sqs:us-west-2:100163808729:mlops-flow-queue",
+      "Resource": "arn:aws:sqs:us-west-2:<account-id>:mlops-flow-queue",
       "Condition": {
         "StringEquals": {
-          "aws:SourceAccount": "100163808729"
+          "aws:SourceAccount": "<account-id>"
         },
         "ArnLike": {
-          "aws:SourceArn": "arn:aws:s3:*:*:data-us-west-2-100163808729"
+          "aws:SourceArn": "arn:aws:s3:*:*:data-us-west-2-<account-id>"
         }
       }
     }
@@ -34,4 +34,5 @@ In the lambda function trigger-mlops-flow, add Trigger as the above SQS queue ml
 Upload the input dataset diamonds.csv in data-us-west-2-100163808729/input and verify if the lambda is getting triggered with default code.
 
 Update the lambda function code to trigger the State Machine
+
 
